@@ -35,6 +35,18 @@ export default function Navbar() {
     }
   }, [menuOpen])
 
+  // Mobile menu links: if we let the browser follow the link while the menu is
+  // animating closed, mobile browsers cancel the smooth scroll. So we close the
+  // menu first, then scroll once the closing animation (250ms) has finished.
+  const goToSection = (e, id) => {
+    e.preventDefault()
+    setMenuOpen(false)
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      history.replaceState(null, '', `#${id}`)
+    }, 300)
+  }
+
   const solid = scrolled || menuOpen
 
   return (
@@ -123,7 +135,7 @@ export default function Navbar() {
                 >
                   <a
                     href={`#${id}`}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={(e) => goToSection(e, id)}
                     className={`block rounded-xl px-4 py-3 font-medium transition-colors ${
                       activeId === id
                         ? 'bg-accent-500/10 text-accent-600 dark:text-accent-400'
