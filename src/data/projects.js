@@ -42,8 +42,8 @@ export const projects = [
     category: 'Web',
     tech: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
     image: '',
-    github: '', // add the repository link after Stage 6 (GitHub + Vercel)
-    demo: '', // add your Vercel link after deployment
+    github: `${GITHUB}/portfolio`,
+    demo: 'https://portfolio-chi-pink-41.vercel.app/',
   },
   {
     title: 'Form Validation',
